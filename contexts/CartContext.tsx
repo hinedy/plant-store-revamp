@@ -20,7 +20,7 @@ type ContextProviderProps = {
   children: ReactNode;
 };
 
-function ContextProvider({ children }: ContextProviderProps) {
+function CartContextProvider({ children }: ContextProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function addToCart(newItem: CartItem) {
@@ -49,4 +49,4 @@ function ContextProvider({ children }: ContextProviderProps) {
   );
 }
 
-export { ContextProvider };
+export { CartContextProvider };
