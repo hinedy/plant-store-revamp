@@ -1,4 +1,5 @@
-export const data = [
+import { Plant } from "./types/Plant"
+export const data: Plant[] = [
   {
       "id": 1,
       "name": "Rose",
