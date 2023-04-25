@@ -6,6 +6,8 @@ import { Plant as PlantType } from "@/types/Plant";
 import { CartItem as CartItemType } from "@/types/CartItem";
 import { useContext } from "react";
 import { CartContext } from "@/contexts/CartContext";
+import styles from "@/styles/Product.module.scss";
+import textStyles from "@/styles/text.module.scss";
 
 interface ProductProps {
   plant: PlantType;
@@ -22,11 +24,8 @@ export default function Product({ plant, cartItems }: ProductProps) {
   };
 
   return (
-    <Link
-      href={`/plant/${plant.id}`}
-      className="group flex flex-col justify-between border-2 border-red-700 border-solid"
-    >
-      <div className="relative aspect-w-1 aspect-h-1 w-full h-[250px] overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8 ">
+    <Link href={`/plant/${plant.id}`} className={styles.container}>
+      <div className={styles.image}>
         <Image
           src={plant.img}
           placeholder="empty"
@@ -36,33 +35,48 @@ export default function Product({ plant, cartItems }: ProductProps) {
                     33vw"
           style={{ objectFit: "cover" }}
           alt="plant preview image"
-          className="h-full w-full object-cover object-center group-hover:opacity-75"
         ></Image>
       </div>
-      <h3 className="mt-4 text-lg text-black-700">{plant.name}</h3>
-      <p className="text-xs text-gray-600">{plant.description}</p>
-      <div className="flex justify-between my-3">
+      <div className={styles.details}>
         <div>
-          <p className="mt-1 text-lg font-medium text-gray-900">
-            {plant.price}
+          <h3 className={textStyles.text_lg}>{plant.name}</h3>
+          <p className={`${textStyles.text_xs} ${textStyles.text_gray}`}>
+            {plant.description}
           </p>
-          <p className="text-xs italic text-gray-600">{plant.availability}</p>
         </div>
-        {inCart && inCart.amount >= 1 ? (
-          <AmountControls {...inCart}></AmountControls>
-        ) : (
-          <Button
-            onClick={(e) => {
-              handleAddToCartClick(e);
-              addToCart({ ...plant, amount: 1 });
-            }}
-            variant="outlined"
-            size="small"
-            color="primary"
-          >
-            Add to Cart
-          </Button>
-        )}
+        <div className={styles.controls}>
+          <div>
+            <p className={textStyles.text_lg}>${plant.price}</p>
+            <p
+              className={`${textStyles.text_xs} ${textStyles.text_gray} ${textStyles.italic}`}
+            >
+              {plant.availability}
+            </p>
+          </div>
+          {inCart && inCart.amount >= 1 ? (
+            <AmountControls {...inCart}></AmountControls>
+          ) : (
+            <Button
+              onClick={(e) => {
+                handleAddToCartClick(e);
+                addToCart({ ...plant, amount: 1 });
+              }}
+              variant="outlined"
+              size="small"
+              color="primary"
+              sx={{
+                color: "darkgreen",
+                borderColor: "darkgreen",
+                "&:hover": {
+                  backgroundColor: "#F6FEFA",
+                  borderColor: "darkgreen",
+                },
+              }}
+            >
+              Add to Cart
+            </Button>
+          )}
+        </div>
       </div>
     </Link>
   );

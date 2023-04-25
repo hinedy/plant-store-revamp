@@ -1,0 +1,3 @@
+$color_primary: #071e08;
+$color_accent: lighten(saturate($color_primary, 10%), 70%);
+$color_primary_light: lighten(saturate($color_primary, 70%), 92%);

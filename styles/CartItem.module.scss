@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(auto, auto));
+  gap: 0.5em;
+  margin: 1em;
+  padding: 0.5em;
+  overflow: hidden;
+  border-radius: 0.5em;
+  border: solid 1px rgb(231, 255, 231);
+  box-shadow: 0.5px 0.5px 15px lightgray;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.85;
+  }
+  .image {
+    position: relative;
+    grid-column: 1/2;
+    max-height: 90px;
+    width: 100%;
+  }
+  .details {
+    grid-column: -1 /2;
+    padding: 0 0.5em;
+  }
+  .controls {
+    grid-column: span 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

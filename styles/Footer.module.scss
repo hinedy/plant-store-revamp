@@ -1,0 +1,10 @@
+@import "colors";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  background-color: white;
+  color: $color_primary;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px 10px;
+}

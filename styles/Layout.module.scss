@@ -1,0 +1,12 @@
+@import "colors";
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $color_primary_light;
+  min-height: 100vh;
+  main {
+    margin: 0;
+  }
+}

@@ -2,6 +2,7 @@ import CartItem from "./CartItem";
 import { useContext, useEffect } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import { CartItem as CartItemType } from "@/types/CartItem";
+import styles from "@/styles/Cart.module.scss";
 
 function Cart() {
   const { cartItems, total, updateTotal, emptyCart } = useContext(CartContext);
@@ -10,27 +11,29 @@ function Cart() {
     updateTotal();
   }, [cartItems, updateTotal]);
 
+  const totalCostDisplay = total.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   return (
-    <div className="flex flex-col  my-10 py-6  rounded-2xl bg-gray-50 ring-1 ring-inset ring-gray-900/5">
+    <div className={styles.container}>
       {cartItems.length > 0 ? (
-        <div className="max-h-80 overflow-y-scroll overflow-x-hidden  mb-4 ">
+        <div className={styles.wrapper}>
           {cartItems.map((item: CartItemType, index: number) => {
             return <CartItem key={index} {...item} />;
           })}
         </div>
       ) : (
-        <p className="m-auto">Your Cart is Empty</p>
+        <p className={styles.message}>Your Cart is Empty</p>
       )}
 
-      <div className="px-6">
-        <div className="flex justify-between p-4">
+      <div className={styles.checkout}>
+        <div className={styles.total}>
           <h3>Total</h3>
-          <p>$ {total}</p>
+          <p> {totalCostDisplay}</p>
         </div>
-        <button
-          onClick={() => emptyCart()}
-          className="w-full bg-black text-white py-6"
-        >
+        <button onClick={() => emptyCart()} className={styles.btn__primary}>
           Checkout
         </button>
       </div>

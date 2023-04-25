@@ -1,0 +1,29 @@
+.container {
+    padding: 2.5rem;
+    justify-content: center;
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat( auto-fit , minmax(300px, 1fr) );
+        gap: 2em;
+        &__products {
+            grid-column: 1/-2 ;
+            gap: 1.5em;
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) );
+        }
+        &__cart{
+            grid-column: span 1 / -1;
+            position: relative;
+            .cart {
+                position: sticky;
+                top: 4rem;
+                right: 2rem
+            }
+
+        }
+    
+    }
+}
+
+
+

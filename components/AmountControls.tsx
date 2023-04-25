@@ -13,6 +13,14 @@ export default function AmountControls({ id, amount }: AmountControlsProps) {
   const { increaseAmount, decreaseAmount, removeFromCart } =
     useContext(CartContext);
 
+  const customStyles = {
+    color: "darkgreen",
+    borderColor: "darkgreen",
+    "&:hover": {
+      backgroundColor: "#F6FEFA",
+      borderColor: "darkgreen",
+    },
+  };
   const handleControlsClick = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
@@ -43,10 +51,11 @@ export default function AmountControls({ id, amount }: AmountControlsProps) {
               removeFromCart(id);
             }
           }}
+          sx={customStyles}
         >
           -
         </Button>
-        <Button disableRipple onClick={handleControlsClick}>
+        <Button disableRipple onClick={handleControlsClick} sx={customStyles}>
           {amount}
         </Button>
         <Button
@@ -54,6 +63,7 @@ export default function AmountControls({ id, amount }: AmountControlsProps) {
             handleControlsClick(e);
             increaseAmount(id);
           }}
+          sx={customStyles}
         >
           +
         </Button>

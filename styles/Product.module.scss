@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: solid 1px lightgray;
+  box-shadow: 0.5px 0.5px 15px lightgray;
+  &:hover {
+    opacity: 0.85;
+  }
+  .image {
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+    width: 100%;
+    border-radius: 0.5em;
+  }
+  .details {
+    display: flex;
+    padding: 1em 0.5em 0.5em 0.5em;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.75em 0;
+    }
+  }
+}

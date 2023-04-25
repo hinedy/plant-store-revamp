@@ -1,0 +1,10 @@
+@import "colors";
+
+.header {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 0;
+  background-color: white;
+  color: $color_primary;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}

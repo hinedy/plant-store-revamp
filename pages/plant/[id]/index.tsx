@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Plant as PlantType } from "@/types/Plant";
+import styles from "@/styles/PlantPage.module.scss";
+import textStyles from "@/styles/text.module.scss";
 
 interface PlantProps {
   plant: PlantType;
@@ -25,8 +27,8 @@ const Plant: NextPage<PlantProps> = ({ plant }) => {
     soil_type: soilType,
   } = plant;
   return (
-    <div className="grid md:grid-cols-5 md:gap-x-6">
-      <div className="relative md:col-span-2 max-w-lg mx-6 h-[500px]">
+    <div className={styles.container}>
+      <div className={styles.image}>
         <Image
           src={img}
           alt={`${name} image`}
@@ -39,35 +41,56 @@ const Plant: NextPage<PlantProps> = ({ plant }) => {
           style={{ objectFit: "cover" }}
         ></Image>
       </div>
-      <div className="md:col-span-2 p-6">
-        <h1 className="text-lg font-bold">{name}</h1>
-        <p>{description}</p>
-        <p>Category: {category}</p>
-        <p>Size: {size}</p>
-        <p>Light Requirements: {lightRequirements}</p>
-        <p>Watering Requirements: {wateringRequirements}</p>
-        <p>Soil Type: {soilType}</p>
-      </div>
-      <div className="md:col-span-1 p-6 flex flex-col">
-        <div className="flex flex-row justify-between w-full px-5">
-          <p>{price}</p>
-          <p>{availability}</p>
+      <div className={styles.details}>
+        <h1 className={`${textStyles.bold} ${textStyles.text_xxl}`}>{name}</h1>
+        <p className={textStyles.text_gray}>{description}</p>
+        <p>
+          <span>Category:</span> {category}
+        </p>
+        <p>
+          <span>Size:</span> {size}
+        </p>
+        <p>
+          <span>Light Requirements:</span> {lightRequirements}
+        </p>
+        <p>
+          <span>Watering Requirements:</span> {wateringRequirements}
+        </p>
+        <p>
+          <span>Soil Type:</span> {soilType}
+        </p>
+        <div className={styles.controls}>
+          <div>
+            <p className={textStyles.text_lg}>${plant.price}</p>
+            <p
+              className={`${textStyles.text_xs} ${textStyles.text_gray} ${textStyles.italic}`}
+            >
+              {plant.availability}
+            </p>
+          </div>
+          {inCart && inCart.amount >= 1 ? (
+            <AmountControls {...inCart}></AmountControls>
+          ) : (
+            <Button
+              onClick={(e) => {
+                addToCart({ ...plant, amount: 1 });
+              }}
+              variant="outlined"
+              size="small"
+              color="primary"
+              sx={{
+                color: "darkgreen",
+                borderColor: "darkgreen",
+                "&:hover": {
+                  backgroundColor: "#F6FEFA",
+                  borderColor: "darkgreen",
+                },
+              }}
+            >
+              Add to Cart
+            </Button>
+          )}
         </div>
-
-        {inCart && inCart.amount >= 1 ? (
-          <AmountControls {...inCart}></AmountControls>
-        ) : (
-          <Button
-            onClick={(e) => {
-              addToCart({ ...plant, amount: 1 });
-            }}
-            variant="outlined"
-            size="small"
-            color="primary"
-          >
-            Add to Cart
-          </Button>
-        )}
       </div>
     </div>
   );
